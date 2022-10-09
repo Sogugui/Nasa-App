@@ -98,12 +98,13 @@ const upDateNeas = async(updateNea) => {
             "moid_au": updateNea.moid_au,
             "q_au_1": updateNea.q_au_1,
             "q_au_2": updateNea.q_au_2,
-            "period_yr": updateNea.reclat,
+            "period_yr": updateNea.period_yr,
             "i_deg": updateNea.i_deg,
             "pha": updateNea.pha,
             "orbit_class": updateNea.orbit_class
         }
-        let oldNea = await neas.findOneAndUpdate({designation: updateNea.designation}, newNea);
+        let oldNea = await neas.findOneAndUpdate({designation: updateNea.designation}, newNea)
+        console.log(oldNea);
         oldNea.overwrite(newNea);
         await oldNea.save();
         return {

@@ -99,6 +99,21 @@ const updateNeas = async (req, res) => {
     }
 }
 
+// const updateNeas = async (req, res) => {
+//     try {
+//         const obj = {
+//             body: req.body,
+//             designation: req.params.designation
+//         }
+//         await neas.upDateNeas(obj);
+//         console.log("Esto es req.body de la func UPDATE", req.body);
+//         res.send("Nea updated!");
+//     } catch (error) {
+//         console.log(`ERROR: ${error.stack}`)
+//         res.status(404).json({ "message": "nea not updated" });
+//     }
+// }
+
 
 //DELETE Nea (object)
 const deleteNea = async (req, res) => {

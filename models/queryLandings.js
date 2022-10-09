@@ -125,7 +125,7 @@ const upDateLandings = async(landing) => {
             "geolocation": landing.geolocation
         }
         //buscamos la landing a modificar por ID
-        let oldLand = await Landing.findOneAndUpdate({id: landing.id}, newLand);
+        let oldLand = await Landing.findOne({id: landing.id}, newLand);
         //para sobreescribir la existente:
         oldLand.overwrite(newLand);
         //para guardar la sobreescrita:

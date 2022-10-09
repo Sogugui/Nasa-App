@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 
 const Card = (data) => {
     const landing= data.data
+    const [deleted,setDeleted]= useState("")
     const { register, handleSubmit } = useForm();
 
     const deleteLanding= async () => {
@@ -16,7 +17,9 @@ const Card = (data) => {
             console.log("info:", info);
             console.log("esto es la peticion",response);
             console.log("landing. id que borramos", landing.id);
-            data.remove(response);            
+            data.remove(response);
+            
+            setDeleted();
         } catch (error) {
             console.log(error)
         }
@@ -35,10 +38,12 @@ const Card = (data) => {
               latitude: id.reclat,
               longitude: id.reclong
             }
+            
           };
-          console.log(id);
-          const res = await axios.put(`http://localhost:5000/api/astronomy/landings/edit/${landing.id}`, putLanding);
-          const data = await res.asteroid;
+          console.log(putLanding);
+          const response = await axios.put(`http://localhost:5000/api/astronomy/landings/update/${landing.id}`, putLanding);
+          console.log(response);
+          const data = await response.data;
           console.log("esto es data", data);
           
           

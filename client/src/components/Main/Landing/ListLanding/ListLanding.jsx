@@ -36,7 +36,6 @@ const removeLanding = (i) =>{
 
 
 
-
 // //búsqueda por nombre 
 // function handleName() {
 //   const orderNames = [...dataLands].sort((a, b) => {
