@@ -3,11 +3,20 @@ import axios from 'axios'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { useForm } from "react-hook-form";
+import gif1 from '../../../../../assets/godofdeath.gif'
+import gif2 from '../../../../../assets/comet.gif'
+import gif3 from '../../../../../assets/morty.gif'
+import gif4 from '../../../../../assets/rick.gif'
+import gif5 from '../../../../../assets/sprinfield.gif'
 
 const Card = (data) => {
     const landing= data.data
     const [deleted,setDeleted]= useState("")
     const { register, handleSubmit } = useForm();
+
+    const gifs = [gif1,gif2,gif3,gif4,gif5];
+    const allGifs = gifs.sort((a, b) => 0.5 - Math.random());
+   
 
     const deleteLanding= async () => {
         try {
@@ -55,19 +64,22 @@ const Card = (data) => {
 
 
   return (
-    <section>
-    <div>
-       <h3>{landing.name}</h3>
-       <p>ID: {landing.id}</p>
-       <p>Nametype: {landing.nametype}</p>
-       <p>Reclass: {landing.recclass}</p>
-       <p>Mass: {landing.mass}</p>
-       <p>Fall: {landing.fall}</p>
-       <p>Year: {landing.year}</p>
-       <p>Reclat: {landing.reclat}</p>
-       <p>Reclong: {landing.reclong}</p>
-       <button onClick={deleteLanding}>Delete</button>
-       <Popup trigger={<button>Edit</button>} position="bottom left">
+    <section className="flex flex-col flex-wrap justify-center content-center  items-center justify-items-center my-3">
+      <a href="#" className="flex flex-col items-center justify-items-center mx-3 bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl lg:px-5   hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+       
+          <div className="flex flex-col justify-between p-4 leading-normal">
+          <img src={allGifs[0]} className="object-cover w-full h-[100%] rounded-t-lg md:h-auto md:w-60  md:rounded-l-lg  md:rounded-b-lg "  alt=""/>
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{landing.name}</h5>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Id: {landing.id}</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Nametype:{landing.nametype}</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Class: {landing.recclass}</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Mass: {landing.mass}</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Fall: {landing.fall}</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Year: {landing.year}</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Reclat: {landing.reclat}</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Reclong: {landing.reclong}</p>
+            <button onClick={deleteLanding}  className="w-full my-2 px-2 py-1 bg-gray-500/100 hover:bg-amber-400  text-slate-100 rounded-lg" type="submit">Delete</button>
+            <Popup trigger={<button className="w-full px-2 py-1 bg-gray-500/100 hover:bg-amber-400  text-slate-100 rounded-lg">Edit</button>} position="bottom left">
         {close => (
           <div>
             <form onSubmit={handleSubmit(editLanding)}>
@@ -83,8 +95,9 @@ const Card = (data) => {
           </div>
         )}
       </Popup>
-     </div>
- </section>
+          </div>
+   </a>
+   </section>
   )
 }
 
