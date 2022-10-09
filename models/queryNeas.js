@@ -1,102 +1,143 @@
-let Nea = require("../schemas/neas")
+const neas = require('../schemas/neas');
 
+//--------- Funciones Query para los GET ----------//
+
+//para coger todas las neas:
 const getAllNeas = async () => {
     try{
-        const getNeas = await Nea.find({},"-_id");
+        const getNeas = await neas.find({});
+        console.log("query de allNeas")
         return getNeas
     }
-    catch(err){
-        console.error(err);
+    catch(error){
+        console.error(error);
     }
 }
 
-const getOrbit = async (orbit) => {
+const getByOrbit = async (orbit) => {
     try {
-        const getOrbitClass = await Nea.find({orbit_class: orbit}, "orbit_class -_id designation period_yr")
-        return getOrbitClass
+        const getByOrbitClass = await neas.find({orbit_class: orbit}, "-_id designation period_yr orbit_class")
+        return getByOrbitClass
 
     } catch (error) {
         console.error(error);
     }
 }
 
-const getYearFrom= async(from)=>{
-    try{
-        
-        const getYearFrom= await Nea.find({year:{$gte:from}},"designation discovery_date period_yr");
-        return getYearFrom
-       
+
+//query por fecha:
+const getNeasTo = async (dateTo) => {
+    try {
+        const getNeasDateTo = await neas.find({year:{$lt:dateTo}});
+        return getNeasDateTo
+
+    } catch (error) {
+        console.error(error);
     }
-    catch(err){console.log(err);}
 }
 
-const getYearTo= async(to)=>{
-    try{
-        const getYearTo= await Nea.find({year:{$lte:to}},"designation discovery_date period_yr");
-        return getYearTo
+
+const getNeasFrom = async (dateFrom) => {
+    try {
+        const getNeasDateFrom = await neas.find({year:{$gt:dateFrom}});
+        return  getNeasDateFrom
+
+    } catch (error) {
+        console.error(error);
     }
-    catch(err){console.log(err);}
-}
-const getYear= async(from,to)=>{
-    try{
-        const getYear= await Nea.find({year:{$gte:from,$lte:to}},"designation discovery_date period_yr");
-        return getYear
-    }
-    catch(err){console.log(err);}
 }
 
-const getDate = async(especificDate)=>{
-    try{
-        const getespecificDate= await Nea.find({discovery_date:{$in:especificDate}}, "designation discovery_date period_yr");
-        return getespecificDate
-    }
-    catch(err){console.log(err);}
-}
-const createNeas= async(newNea)=> {
 
-    try{
-        const createNewNea= new Nea (newNea)
-        let res= await createNewNea.save()
-        console.log(res);
-        return {res}
+const getNeasFromTo = async (dateTo, dateFrom) => {
+    try {
+        const getNeasDateFromTo = await neas.find({year:{$gt:dateFrom, $lt:dateTo}});
+        return getNeasDateFromTo
+
+    } catch (error) {
+        console.error(error);
     }
-    catch(err){console.log(err);}
 }
 
-const updateNea= async(updateNea)=>{
-    try{
-        const updateNea= {
-            "designation": Nea.designation,
-            "discovery_date": Nea.discovery_date,
-            "h_mag": Nea.h_mag,
-            "moid_au": Nea.moid_au,
-            "q_au_1": Nea.q_au_1,
-            "q_au_2": Nea.q_au_2,
-            "period_yr": Nea.period_yr,
-            "i_deg": Nea.i_deg,
-            "pha": Nea.pha,
-            "orbit_class": Nea.orbit_class
-          }
-        const oldNea= await Nea.findByIdAndUpdate({designation:Nea.designation},updateNea)
-        oldNea.overwrite(updateNea)//Se sobreescribe el viejo por el nuevo
-        console.log("Este es el Nea viejo despues de ser actualizado",oldNea);
-        await oldNea.save()//se guarda en la bbdd
-        return{
-            oldNea
+
+//query por fecha más ajustada:
+const getNeasByDate = async (date) => {
+    try {
+        const getNeasDate = await neas.find({discovery_date:{$regex: date, $options: 'i'}});
+        return getNeasDate
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+//--------- Función Query para el POST ----------//
+const createNeas = async (newNea) => {
+    try {
+
+        let createNea = new neas (newNea);
+        let response = await createNea.save();
+
+        return {
+            Objective: "New object created:",
+            Nea: response
         }
+
+    } catch (error) {
+        console.log(`ERROR:${error}`)
+    }
+}
+
+//--------- Función Query para el PUT ----------//
+const upDateNeas = async(updateNea) => {
+    try {
+        const newNea = {
+            "designation": updateNea.designation,
+            "discovery_date": updateNea.discovery_date,
+            "h_mag": updateNea.h_mag,
+            "moid_au": updateNea.moid_au,
+            "q_au_1": updateNea.q_au_1,
+            "q_au_2": updateNea.q_au_2,
+            "period_yr": updateNea.reclat,
+            "i_deg": updateNea.i_deg,
+            "pha": updateNea.pha,
+            "orbit_class": updateNea.orbit_class
         }
-    
-    catch(err){console.log(err);}
+        let oldNea = await neas.findOneAndUpdate({designation: updateNea.designation}, newNea);
+        oldNea.overwrite(newNea);
+        await oldNea.save();
+        return {
+            Objective: "neas updated!",
+            Nea: oldNea
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
-module.exports ={
+//--------- Función Query para el DELETE ----------//
+const deleteNeas = async (delNea) => {
+    try {
+        let response = await neas.deleteOne({designation: delNea.designation});
+        console.log("Nea eliminated",response);
+        return `Nea with id ${delNea.designation} has been deleted.`
+
+    } catch (error) {
+        console.log(`ERROR:${error}`)
+    }
+}
+
+
+module.exports = {
     getAllNeas,
-    getOrbit,
-    getYearFrom,
-    getYearTo,
-    getYear,
-    getDate,
+    getByOrbit,
+    getNeasTo,
+    getNeasFrom,
+    getNeasFromTo,
+    getNeasByDate,
     createNeas,
-    updateNea
-}
+    upDateNeas,
+    deleteNeas
+};

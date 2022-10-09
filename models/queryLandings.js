@@ -1,144 +1,166 @@
-let Landing = require("../schemas/landings")
+const Landing = require('../schemas/landings')
 
 
+//--------- Funciones Query para los GET ----------//
+
+//para coger todos:
 const getAllLandings = async () => {
     try{
-        const getLandings = await Landing.find({},"-_id");
+        let getLandings = await Landing.find({},"-_id");
         return getLandings
     }
     catch(err){
         console.error(err);
     }
 }
-const getLandingsById = async (id) => {
-    try{
-        const getLandingsById = await Landing.find({id:{$in:id}},"-_id year name ");
-        return getLandingsById
-    }
-    catch(err){
-        console.error(err);
+
+
+
+//para masa mínima:
+const getLandingsMassMin = async(minMassToNum) => {
+    try {
+        let getLandingsMassMin = await Landing.find( {mass: {$gt: minMassToNum}} )
+        console.log(getLandingsMassMin);
+        return getLandingsMassMin
+
+    } catch (error) {
+        console.error(error)
     }
 }
 
-const getMinimumMass = async (minimumMass) => {
-    try{
-        const getMinimumLandings = await Landing.find({mass:{$gt:minimumMass}}, "name mass");
-        return getMinimumLandings
-    }
-    catch(err){
-        console.error(err);
+
+//para la masa:
+const getLandingByMass = async (mass) => {
+    try {
+        const getLandingMass = await Landing.find({mass: mass}, "name mass year -_id")
+        return getLandingMass
+
+    } catch (error) {
+        console.error(error);
     }
 }
 
-const getMass = async(especificMass)=>{
-    try{
-        const getespecificMass= await Landing.find({mass:{$in:especificMass}}, "name mass id year");
-        return getespecificMass
+
+//para conseguir por fecha (desde 1960) - FROM:
+const getLandingFrom = async(dateFrom) => {
+    try {
+        let landingDateFromTo = await Landing.find({year: {$gt:dateFrom}})
+        return landingDateFromTo
+
+    } catch (error) {
+        console.error(error);
     }
-    catch(err){console.log(err);}
 }
 
-const getClass = async(especificClass)=>{
-    try{
-        const getespecificClass= await Landing.find({recclass:{$in:especificClass}},"name recclass");
-        return getespecificClass
+
+//para conseguir por fecha (hasta 1990) - TO:
+const getLandingTo = async (dateTo) => {
+    try {
+        let landingDateFromTo = await Landing.find({year: {$lt:dateTo}})
+        return landingDateFromTo
+
+    } catch (error) {
+        console.error(error);
     }
-    catch(err){console.log(err);}
-}
-const getYearFrom= async(from)=>{
-    try{
-        
-        const getYearFrom= await Landing.find({year:{$gte:from}},"name year mass id3");
-        return getYearFrom
-       
-    }
-    catch(err){console.log(err);}
 }
 
-const getYearTo= async(to)=>{
-    try{
-        const getYearTo= await Landing.find({year:{$lte:to}},"name year mass");
-        return getYearTo
+
+//para conseguir ambas fechas:
+const getLandingFromTo = async (dateFrom, dateTo) => {
+    try {
+        let landingDateFromTo = await Landing.find({year:{$gt:dateFrom, $lt:dateTo}});
+        return landingDateFromTo
+
+    } catch (error) {
+        console.error(error);
     }
-    catch(err){console.log(err);}
-}
-const getYear= async(from,to)=>{
-    try{
-        const getYear= await Landing.find({year:{$gt:from,$lt:to}},"name mass year");
-        return getYear
-    }
-    catch(err){console.log(err);}
 }
 
-///////////  POST /////////////////////
-const createNewLanding= async(newLanding)=> {
 
-    try{
-        const createNewLanding= new Landing (newLanding)
-        let res= await createNewLanding.save()
-        console.log(res);
-        return {res}
+//para la class:
+const getLandingByClass = async (byClass) => {
+    try {
+  
+        const getLandingsClass = await Landing.find({recclass: byClass}, "name recclass year -_id")
+        return getLandingsClass
     }
-    catch(err){console.log(err);}
-}
+    catch(error){
+    console.error(error);
+}}
 
-///////PUT/////////////////
-const updateLanding= async(updateLanding)=>{
-    try{
-        const updateLanding= {
-                "name": Landing.name,
-                "id":  Landing.id,
-                "nametype":  Landing.nametype,
-                "recclass":  Landing.recclass,
-                "mass": Landing.mass,
-                "fall":  Landing.fall,
-                "year":  Landing.year,
-                "reclat":  Landing.reclat,
-                "reclong":  Landing.reclong,
-                "geolocation":  Landing.geolocation
-              }
-        const oldLanding= await Landing.findByIdAndUpdate({id:Landing.id},updateLanding)
-        oldLanding.overwrite(updateLanding)//Se sobreescribe oldLanding por el nuevo esquema(updateLanding)
-        console.log("Este es el landing viejo despues de ser actualizado",oldLanding);
-        await oldLanding.save()//se guarda en la bbdd
-        return{
-            oldLanding
+
+//--------- Función Query para el POST ----------//
+const createLanding = async (newLanding) => {
+    try {
+
+        //para crear el nuevo objeto en la colección Landing:
+        let createLanding = new Landing (newLanding);
+        //para que se guarde el objeto que le pasamos en el body
+        let response = await createLanding.save();
+
+        return {
+            Objective: "New object created:",
+            Landing: response
         }
-        }
-    
-    catch(err){console.log(err);}
-}
 
-///////////////////DELETE///////////////////////
-const dropLandings= async(deleteLanding)=> {
-
-    try{
-        const deleteLandings = async (deleteLanding) => {
-            try {
-                let response = await Landing.deleteOne({id:Landing.id});
-                console.log("Landing deleted",response);
-                return `Landing ${Landing.name} ${Landing.id} deleted.`
-        
-            } catch (error) {
-                console.log(`ERROR:${error}`)
-            }
-        }
+    } catch (error) {
+        console.log(`ERROR:${error}`)
     }
-    catch(err){console.log(err);}
 }
 
 
-module.exports={
+//--------- Función Query para el PUT ----------//
+const upDateLandings = async(landing) => {
+    try {
+        const newLand = {
+            "id": landing.id,
+            "name": landing.name,
+            "nametype": landing.nametype,
+            "recclass": landing.recclass,
+            "mass": landing.mass,
+            "fall": landing.fall,
+            "year": landing.year,
+            "reclat": landing.reclat,
+            "reclong": landing.reclong,
+            "geolocation": landing.geolocation
+        }
+        //buscamos la landing a modificar por ID
+        let oldLand = await Landing.findOneAndUpdate({id: landing.id}, newLand);
+        //para sobreescribir la existente:
+        oldLand.overwrite(newLand);
+        //para guardar la sobreescrita:
+        await oldLand.save();
+        return {
+            Objective: "Landing updated!",
+            Landing: oldLand
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//--------- Función Query para el DELETE ----------//
+const deleteLandings = async (landing) => {
+    try {
+        let response = await Landing.deleteOne({id:landing});
+        console.log("Landing eliminated",response);
+        return `Landing with id ${landing.id} has been deleted.`
+    } catch (error) {
+        console.log(`ERROR:${error}`)
+    }
+}
+
+
+
+module.exports = {
     getAllLandings,
-    getLandingsById,
-    getMinimumMass,
-    getMass, 
-    getClass,
-    getYearFrom,
-    getYearTo,
-    getYear,
-    createNewLanding,
-    updateLanding,
-    dropLandings
-
+    getLandingsMassMin,
+    getLandingByMass,
+    getLandingFrom,
+    getLandingTo,
+    getLandingFromTo,
+    getLandingByClass,
+    createLanding,
+    upDateLandings,
+    deleteLandings
 }

@@ -1,7 +1,7 @@
 {
-  "name": "nasa-api",
+  "name": "api-nasa",
   "version": "1.0.0",
-  "description": "",
+  "description": "Nasa project",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,24 +9,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sogugui/NasaApi.git"
+    "url": "git+https://github.com/monicaortiz20/API-Nasa.git"
   },
-  "author": "Sofia Guardia",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sogugui/Nasa-Api/issues"
+    "url": "https://github.com/monicaortiz20/API-Nasa/issues"
   },
-  "homepage": "https://github.com/Sogugui/NasaApi#readme",
+  "homepage": "https://github.com/monicaortiz20/API-Nasa#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "database": "^0.0.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mongodb": "^4.8.1",
     "mongoimport": "^1.0.6",
-    "mongoose": "^6.5.1",
-    "node-fetch": "^2.6.7",
+    "mongoose": "^6.5.2",
     "nodemon": "^2.0.19",
-    "request": "^2.88.2",
-    "tools": "^0.0.0"
+    "request": "^2.88.2"
   }
 }

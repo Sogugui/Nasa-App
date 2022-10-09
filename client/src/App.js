@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter} from 'react-router-dom';
+import React from 'react';
+
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import Footer from './components/Footer/Footer';
+import { useState } from 'react';
+import {landingContext} from './context/landingContext'
+
 
 function App() {
+  const [landing,setLanding]= useState([])
+
+  const asteroid = {
+    landing,
+    setLanding
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <landingContext.Provider value={asteroid}>
+      <BrowserRouter>
+        <Header/>
+        <Main/>
+      </BrowserRouter>
+      </landingContext.Provider>
+      <Footer/>
     </div>
   );
 }

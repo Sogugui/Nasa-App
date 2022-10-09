@@ -1,16 +1,17 @@
 const express = require('express')
 
-
-//Rutas de productos
-
+//Rutas 
 const landingsApiController= require("../controllers/landingsApiController");
 const landingsApiRouter= express.Router();
 
-landingsApiRouter.get("/landings",landingsApiController.getLandings)
-landingsApiRouter.post("/create",landingsApiController.postLandings)
-landingsApiRouter.put("/edit",landingsApiController.putLandings)
-landingsApiRouter.delete("/delete",landingsApiController.dropLandings)
+
+//API landings:
+landingsApiRouter.get("/astronomy/landings",landingsApiController.getLandings)
+landingsApiRouter.get('/astronomy/landings/mass/:mass', landingsApiController.getLandingsByMass)
+landingsApiRouter.get('/astronomy/landings/class/:class', landingsApiController.getLandingsByClass)
+landingsApiRouter.post('/astronomy/landings/create', landingsApiController.createNewLanding)
+landingsApiRouter.put('/astronomy/landings/update/:id?', landingsApiController.updateLanding)
+landingsApiRouter.delete('/astronomy/landings/delete/:id', landingsApiController.deleteLanding)
 
 
-
-module.exports= landingsApiRouter
+module.exports= landingsApiRouter;

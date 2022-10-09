@@ -1,16 +1,14 @@
 const express = require('express')
 
-
-//Rutas de productos
-
+//Rutas 
 const neasApiController= require("../controllers/neasApiController");
 const neasApiRouter= express.Router();
 
-neasApiRouter.get("/neas",neasApiController.getNeas)
-neasApiRouter.post("/neas/create",neasApiController.postNeas)
-neasApiRouter.put("/neas/edit",neasApiController.putNeas)
-// neasApiRouter.delete("/neas/delete",neasApiController.dropNeas)
+//API neas:
+neasApiRouter.get("/astronomy/neas",neasApiController.getNeas);
+neasApiRouter.post('/astronomy/neas/create', neasApiController.createNewNea)
+neasApiRouter.put('/astronomy/neas/edit', neasApiController.updateNeas)
+neasApiRouter.delete('/astronomy/neas/delete/:designation?', neasApiController.deleteNea)
 
 
-
-module.exports= neasApiRouter
+module.exports= neasApiRouter;

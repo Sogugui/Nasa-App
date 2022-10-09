@@ -35,6 +35,6 @@ const neasSchema = {
 };
 
 const createNeasSchema = mongoose.Schema(neasSchema);
-const Neas = mongoose.model('neas', createNeasSchema);
+const Nea = mongoose.model('neas', createNeasSchema);
 
-module.exports = Neas;
+module.exports = Nea;
