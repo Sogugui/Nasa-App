@@ -45,7 +45,7 @@ const Nav = () => {
         className={`top-0 right-0 w-[100vw] bg-black/90
                 text-white fixed h-full z-40  ease-in-out duration-300
                 flex flex-col justify-start items-center
-                pt-20 gap-20
+                pt-20 gap-20'
       ${showSidebar ? 'translate-x-0 ' : 'translate-x-full'}`}
       >
         <div className='flex gap-4 w-1/3'>

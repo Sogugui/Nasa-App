@@ -36,23 +36,22 @@ const Create = () => {
 
 
   return (
-    <div>
-    <h2>Create your own landing!</h2>
-    <form onSubmit={handleSubmit(createNewLanding)}>
-      {/* Para usar register de react hook form hay que llamar igual al name del input y a lo que le pasas por register */}
-      <section sx={{ maxWidth: 345 }}>
+    <div className="py-10">
+    <h2 className="text-black text-center font-semibold text-xxl underline my-6 transition hover:text-amber-500" >Create your own landing!</h2>
+    <div className="flex flex-col items-center justify-items-center py-10">
+    <form className={"flex items-center content-around justify-center  flex-col justify-items-center gap-4"} onSubmit={handleSubmit(createNewLanding)}>
           <input {...register("name")}  placeholder="Name" label="Name"  name="name" required/>
-          <input {...register("id")} placeholder="id" label="ID"  name="id" required/>
+          <input {...register("id")} placeholder="Id" label="ID"  name="id" required/>
           <input {...register("nametype")} placeholder="NameType" label="Weight"  name="nametype" required/>
-          <input {...register("recclass")} placeholder="class" label="Class"   name="recclass" required/>
-          <input {...register("year")} placeholder="Year" type="date"  name="year" required/>
+          <input {...register("recclass")} placeholder="Class" label="Class"   name="recclass" required/>
           <input {...register("mass")} placeholder="Mass" label="Weight"  name="mass" required/>
           <input {...register("fall")} placeholder="Fall" label="Weight"  name="fall" required/>
           <input {...register("reclat")} placeholder="Latitude" label="Latitude"  name="reclat" required/>
           <input {...register("reclong")} placeholder="Longitude" label="Longitude"  name="reclong" required/>
-          <button size="small" type="submit">Submit</button>
-      </section>
+          <input {...register("year")} placeholder="Year" type="date"  name="year" required/>
+          <button className="w-60 my-2 px-2 py-2 bg-slate-400/80 hover:bg-amber-500 text-slate-100 rounded-lg" size="small" type="submit">Submit</button>
     </form>
+    </div>
   </div>
   )
 }
