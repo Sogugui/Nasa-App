@@ -57,7 +57,7 @@ const removeLanding = (i) =>{
 
   return   <section>
       {/* //cogemos datos del fetch y los pintamos */}
-      <h3>HERE THEY ARE!</h3>
+      
       {allLandings.length !== 0 ? allLandings.map((data, i) => <Card data={data} key={i} remove={()=> removeLanding(i)}/>)
         : null}
     </section>

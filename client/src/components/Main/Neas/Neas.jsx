@@ -41,12 +41,12 @@ const changeRoute = () => {
 
 
   return (
-    <section>
+    <section className=" flex flex-col items-center justify-center animate__animated animate__bounceInRight">
     {/* //cogemos datos del fetch y los pintamos */}
-    <h3>All the Neas!</h3>
+    <h3 className="text-black text-center font-semibold text-xl transition hover:text-amber-300">All Neas!</h3>
     <div style={{margin:'30px'}}>
       <h4>Create your own Nea!</h4>
-      <button onClick={changeRoute} type="submit">Create</button>      
+      <button className=" flex items-center justify-center w-40 px-2 py-1 bg-gray-500/100 hover:bg-amber-400  text-slate-100 rounded-lg" onClick={changeRoute} type="submit">Create</button>      
     </div>
     {allNeas.length !== 0 ? allNeas.map((data, i) => <CardNeas data={data} key={i} remove={()=> removeNea(i)}/>)
       : null}
