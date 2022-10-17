@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    
+    .h3{
+        @apply  text-white text-center font-semibold text-xl transition hover:text-amber-300
+    }
+    .button{
+        @apply  flex items-center justify-center w-40 px-2 py-1 bg-gray-500/100 hover:bg-amber-400  text-slate-100 rounded-lg
+    }
+}

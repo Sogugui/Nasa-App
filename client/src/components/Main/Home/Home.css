@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    .section{
+        @apply bg-pc overflow-scroll bg-cover h-[100vh] dark:bg-gray-900 py-8
+    }
+    .titlesDiv{
+        @apply text-center mt-[-18.75rem]
+    }
+    .h1{
+        @apply text-3xl font-semibold text-white capitalize lg:text-4xl dark:text-white 
+    }
+    .imgInfo{
+        @apply mt-12 h-[105px] 
+    }
+    
+
+}

@@ -8,6 +8,7 @@
       background: linear-gradient(180deg, rgba(31,28,24,1) 0%, rgba(142,14,0,1) 100%);
   }
 
+  
   input{
        @apply px-4 py-2 bg-white hover:bg-gray-200 rounded-md outline-none
   }

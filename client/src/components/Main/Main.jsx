@@ -6,6 +6,7 @@ import Create from "../Main/Landing/Create/Create";
 import Neas from "../../components/Main/Neas/Neas";
 import NewNea from "./Neas/NewNea/NewNea";
 import ListLanding from "./Landing/ListLanding/ListLanding";
+import './Main.css'
 
 class Main extends Component {
   render() {

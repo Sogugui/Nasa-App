@@ -1,4 +1,5 @@
 import React from 'react'
+import './Footer.css'
 
 const Footer = () => {
   return (<footer className="flex-col p-6 bg-slate-50 sm:flex-row w-full h-16 border-t-2 gap-2 border-white
@@ -7,7 +8,9 @@ const Footer = () => {
   text-white text-2xl">
     <a href="#" className="text-xl font-bold text-gray-600 transition-colors duration-300 dark:text-white hover:text-gray-700 dark:hover:text-gray-300"></a>
 
-    <p className="text-sm text-gray-600 dark:text-gray-300">© Copyright 2022. Developed by Sofía Guardia.</p>
+    <p className="sofia">© Copyright 2022. Developed by Sofía Guardia.</p>
+ 
+
 
     <div className="flex -mx-2">
       <a href="https://github.com/Sogugui" className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-amber-300 dark:hover:text-amber-400" aria-label="Github">

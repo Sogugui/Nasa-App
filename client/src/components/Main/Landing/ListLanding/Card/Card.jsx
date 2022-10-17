@@ -3,6 +3,7 @@ import axios from 'axios'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { useForm } from "react-hook-form";
+import './Card.css'
 import gif1 from '../../../../../assets/godofdeath.gif'
 import gif2 from '../../../../../assets/comet.gif'
 import gif3 from '../../../../../assets/morty.gif'
@@ -64,22 +65,22 @@ const Card = (data) => {
 
 
   return (
-    <section className="flex flex-col flex-wrap justify-center content-center  items-center justify-items-center my-3">
-      <a href="#" className="flex flex-col items-center justify-items-center mx-3 bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl lg:px-5   hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <section className="section">
+      <a href="#" className="">
        
-          <div className="flex flex-col justify-between p-4 leading-normal">
-          <img src={allGifs[0]} className="object-cover w-full h-[100%] rounded-t-lg md:h-auto md:w-60  md:rounded-l-lg  md:rounded-b-lg "  alt=""/>
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{landing.name}</h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Id: {landing.id}</p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Nametype:{landing.nametype}</p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Class: {landing.recclass}</p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Mass: {landing.mass}</p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Fall: {landing.fall}</p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Year: {landing.year}</p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Reclat: {landing.reclat}</p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Reclong: {landing.reclong}</p>
-            <button onClick={deleteLanding}  className="w-full my-2 px-2 py-1 bg-gray-500/100 hover:bg-amber-400  text-slate-100 rounded-lg" type="submit">Delete</button>
-            <Popup trigger={<button className="w-full px-2 py-1 bg-gray-500/100 hover:bg-amber-400  text-slate-100 rounded-lg">Edit</button>} position="bottom left">
+          <div className="div">
+          <img src={allGifs[0]} className="img"  alt=""/>
+            <h5 className="h5">{landing.name}</h5>
+            <p className="p">Id: {landing.id}</p>
+            <p className="p">Nametype:{landing.nametype}</p>
+            <p className="p">Class: {landing.recclass}</p>
+            <p className="p">Mass: {landing.mass}</p>
+            <p className="p">Fall: {landing.fall}</p>
+            <p className="p">Year: {landing.year}</p>
+            <p className="p">Reclat: {landing.reclat}</p>
+            <p className="p">Reclong: {landing.reclong}</p>
+            <button onClick={deleteLanding}  className="deleteBtn" type="submit">Delete</button>
+            <Popup trigger={<button className="popup">Edit</button>} position="bottom left">
         {close => (
           <div>
             <form onSubmit={handleSubmit(editLanding)}>

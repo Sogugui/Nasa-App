@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    .div{
+        @apply bg-pc overflow-scroll bg-cover h-[100vh]
+    }
+    .h2{
+        @apply text-white text-center font-semibold text-2xl my-6 transition hover:text-amber-400
+    }
+    .form{
+        @apply flex items-center content-around justify-center flex-col justify-items-center gap-4 mb-[80%]
+    }
+    .btn{
+        @apply w-48 my-2 px-2 py-2 bg-gray-500/80 hover:bg-amber-400 text-slate-100 rounded-lg
+    }
+
+}

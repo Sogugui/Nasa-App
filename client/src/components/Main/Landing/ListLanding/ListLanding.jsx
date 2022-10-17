@@ -1,6 +1,7 @@
 import React , {useEffect,useState,useContext}from 'react'
 import axios from 'axios'
 import Card from './Card/Card'
+import './ListLanding.css'
 
 const ListLanding = () => {
 const [allLandings,setAllLandings]= useState("")
@@ -55,7 +56,7 @@ const removeLanding = (i) =>{
 //   setdataLands(orderYear);
 // }
 
-  return   <section>
+  return   <section className='section'>
       {/* //cogemos datos del fetch y los pintamos */}
       
       {allLandings.length !== 0 ? allLandings.map((data, i) => <Card data={data} key={i} remove={()=> removeLanding(i)}/>)

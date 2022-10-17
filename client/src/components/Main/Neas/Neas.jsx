@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import CardNeas from './CardNeas/CardNeas'
+import './Neas.css'
 import {useNavigate} from 'react-router-dom'
 
 const Neas = () => {
@@ -41,12 +42,13 @@ const changeRoute = () => {
 
 
   return (
-    <section className=" flex flex-col items-center justify-center animate__animated animate__bounceInRight">
+    <section className="  bg-pc overflow-scroll bg-cover flex flex-col items-center justify-center animate__animated animate__bounceInRight">
     {/* //cogemos datos del fetch y los pintamos */}
-    <h3 className="text-black text-center font-semibold text-xl transition hover:text-amber-300">All Neas!</h3>
+    <h3 className="h3
+    }">All Neas!</h3>
     <div style={{margin:'30px'}}>
       <h4>Create your own Nea!</h4>
-      <button className=" flex items-center justify-center w-40 px-2 py-1 bg-gray-500/100 hover:bg-amber-400  text-slate-100 rounded-lg" onClick={changeRoute} type="submit">Create</button>      
+      <button className="button" onClick={changeRoute} type="submit">Create</button>      
     </div>
     {allNeas.length !== 0 ? allNeas.map((data, i) => <CardNeas data={data} key={i} remove={()=> removeNea(i)}/>)
       : null}

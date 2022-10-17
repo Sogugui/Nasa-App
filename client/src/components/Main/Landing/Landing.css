@@ -1,8 +1,50 @@
-.Map{
-height: 100vh;
-background-color: red;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+
+.landingContainer{
+    @apply h-[100vh] flex flex-col items-center justify-center content-center bg-pc overflow-scroll bg-cover lg:flex-row
+}
+.boxContainer{
+    @apply font-poppins flex flex-row lg:flex lg:flex-auto justify-between px-24 pb-[14px] items-center select-none
+}
+.searchH4{
+    @apply text-slate-100 text-center font-semibold text-xl underline my-6 transition hover:text-amber-500
+}
+.searchInpt{
+    @apply w-[9.5rem]
+}
+.select{
+    @apply w-[9.5rem]
+}
+.searchBtn{
+    @apply w-full px-2 py-1 bg-slate-400/80 hover:bg-amber-500  text-slate-100 rounded-lg
+}
+.childrenSection{
+    @apply flex flex-row gap-[10px] text-lg items-center mb-[48px]
+}
+.allLandings{
+    @apply flex flex-row justify-center items-center flex-wrap
+}
+.checkLandings{
+    @apply  text-slate-100 text-center font-semibold text-xl underline my-6 transition hover:text-amber-500
+}
+.landingsBtn{
+    @apply w-[98px] h-[39px] px-2 py-1 hover:bg-amber-500  text-slate-100 rounded-lg
+}
+.createText{
+    @apply  text-slate-100 text-center font-semibold text-xl underline my-6 transition hover:text-amber-500
 }
 
-.prueba{
-    background-color: red;
+.mapDiv{
+    @apply flex justify-center items-center  w-[100%] h-2/3  
+}
+.mapContainer{
+    @apply w-[70%] h-[107%] mt-3 
+}
+
+
+
 }
